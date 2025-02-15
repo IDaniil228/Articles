@@ -30,6 +30,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.login
 
+
+
 class Articles(models.Model):
     title = models.CharField(max_length=256, null=False)
     create_date = models.DateTimeField(auto_now_add=True)
