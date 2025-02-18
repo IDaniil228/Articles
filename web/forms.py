@@ -7,3 +7,8 @@ class RegistrationForm(forms.Form):
     login = forms.CharField(max_length=256)
     password = forms.CharField(max_length=256, widget=forms.PasswordInput())
     repetitionPassword = forms.CharField(max_length=256, widget=forms.PasswordInput())
+
+
+class AuthorizationForm(forms.Form):
+    login = forms.CharField(max_length=256)
+    password = forms.CharField(max_length=256, widget=forms.PasswordInput())

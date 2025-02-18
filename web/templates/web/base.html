@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles</title>
+</head>
+<body>
+    <h1>Articles</h1>
+    <nav>
+        <a href="{% url 'main' %}">Главная</a>
+        <a href="{% url 'auth' %}">Войти</a>
+        <a href="{% url 'registration' %}">Зарегистрироваться</a>
+        {% if user.anonymous %}
+        <p>123</p>
+        {% endif %}
+        <p>123</p>
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>
