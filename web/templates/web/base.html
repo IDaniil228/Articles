@@ -7,13 +7,16 @@
 <body>
     <h1>Articles</h1>
     <nav>
-        <a href="{% url 'main' %}">Главная</a>
-        <a href="{% url 'auth' %}">Войти</a>
-        <a href="{% url 'registration' %}">Зарегистрироваться</a>
-        {% if user.anonymous %}
-        <p>123</p>
+
+        {% if user.is_anonymous %}
+            <a href="{% url 'auth' %}">Войти</a>
+            <a href="{% url 'registration' %}">Зарегистрироваться</a>
         {% endif %}
-        <p>123</p>
+        {% if not user.is_anonymous %}
+            <a href="{% url 'main' %}">Профиль</a>
+            <a href="{% url 'articles_create' %}">Написать статью</a>
+            <a href="{% url 'logout' %}">Выйти</a>
+        {% endif %}
     </nav>
     <hr>
     {% block content %}{% endblock %}

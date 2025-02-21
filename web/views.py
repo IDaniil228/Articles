@@ -1,12 +1,19 @@
-from django.contrib.auth import authenticate, login
+from collections import defaultdict
+
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from web.forms import RegistrationForm, AuthorizationForm
-from web.models import CustomUser
+from web.forms import RegistrationForm, AuthorizationForm, ArticlesForm
+from web.models import CustomUser, Articles
 
 
 def main_view(request):
+    if not request.user.is_anonymous:
+        articles = Articles.objects.filter(user=request.user)
+        return render(request, "web/main.html", {
+            "articles" : articles
+        })
     return render(request, "web/main.html")
 
 def registration_view(request):
@@ -38,5 +45,23 @@ def auth_view(request):
                 login(request, user)
                 return redirect("main", permanent=True)
     return render(request, "web/authorization.html", {
+        "form" : form
+    })
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("main")
+
+
+def articles_view(request, id = None):
+    articles = Articles.objects.get(id=id) if id is not None else None
+    form = ArticlesForm(instance=articles)
+    if request.method == "POST":
+        form = ArticlesForm(data=request.POST, instance=articles, initial={"user" : request.user})
+        if form.is_valid():
+            form.save()
+            return redirect("main")
+    return render(request, "web/articles.html", {
         "form" : form
     })

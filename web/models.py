@@ -21,6 +21,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=256, null=False)
     surname = models.CharField(max_length=256, null=False)
     subscriptions = models.ManyToManyField('self', symmetrical=False, blank=True)
+    photo = models.ImageField()
 
     USERNAME_FIELD = "login"
     REQUIRED_FIELDS = ['name', 'surname']
@@ -37,6 +38,8 @@ class Articles(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    image = models.ImageField()
+
 
     def __str__(self):
         return self.title

@@ -1,9 +1,24 @@
 {% extends "web/base.html" %}
 {% block content %}
-    <h1>Hello world!</h1>
+    <h1>Профиль</h1>
 
-    {% if not user.anonymous %}
-        <p>Привет, {{user.name}}</p>
+    {% if user.is_anonymous %}
+        <p><b>Необходимо авторизоваться</b></p>
+    {% endif %}
+
+    {% if not user.is_anonymous %}
+        <p><b>{{user.name}} {{user.surname}}</b></p>
+        <p>Ваши статьи:</p>
+        <ul>
+            {% for item in articles %}
+                <li>
+                    <b>{{ item.title }}</b>
+                    Дата публикации - {{item.create_date|date:'d-m-Y'}}
+                    <a href="{% url 'articles_edit' item.id %}">Редактировать</a>
+                </li>
+            {% endfor %}
+        </ul>
+
     {% endif %}
 
 {% endblock %}
