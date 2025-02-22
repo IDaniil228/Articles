@@ -1,5 +1,5 @@
-# Создано https://www.toptal.com/developers/gitignore/api/django
-# Редактировать в https://www.toptal.com/developers/gitignore?templates=django
+# Created by https://www.toptal.com/developers/gitignore/api/django
+# Edit at https://www.toptal.com/developers/gitignore?templates=django
 
 ### Django ###
 *.log
@@ -8,79 +8,79 @@
 __pycache__/
 local_settings.py
 db.sqlite3
-db.sqlite3-журнал
-медиа
+db.sqlite3-journal
+media
 
-# Если ваш процесс сборки включает запуск collectstatic, то вам, вероятно, не нужно включать staticfiles или вы не хотите их включать/
-# в вашем репозитории Git. Соответствующим образом обновите и раскомментируйте следующую строку.
+# If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
+# in your Git repository. Update and uncomment the following line accordingly.
 # <django-project-name>/staticfiles/
 
 ### Django.Python Stack ###
-# Скомпилированные в байтах / оптимизированные / DLL файлы
+# Byte-compiled / optimized / DLL files
 *.py[cod]
 *$py.class
 
-# Расширения C
+# C extensions
 *.so
 
-# Дистрибутив / упаковка
+# Distribution / packaging
 .Python
-сборка/
-development-eggs/
+build/
+develop-eggs/
 dist/
-Загрузки/
+downloads/
 eggs/
 .eggs/
-библиотека/
+lib/
 lib64/
-части/
+parts/
 sdist/
 var/
 wheels/
-поделиться /python-wheels/
-*.egg-информация /
-.установлено.cfg
+share/python-wheels/
+*.egg-info/
+.installed.cfg
 *.egg
-МАНИФЕСТ
+MANIFEST
 
 # PyInstaller
-# Обычно эти файлы записываются скриптом python из шаблона
-# перед тем, как PyInstaller соберет exe-файл, чтобы ввести в него дату / другую информацию.
-* .манифест
-*.спецификация
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
 
-# Журналы установщика
+# Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Отчеты о модульном тестировании / покрытии
+# Unit test / coverage reports
 htmlcov/
-.токсин/
+.tox/
 .nox/
-.покрытие
-.покрытие.*
-.кэш
+.coverage
+.coverage.*
+.cache
 nosetests.xml
 coverage.xml
-*.обложка
-*.py, обложка
-.гипотеза/
+*.cover
+*.py,cover
+.hypothesis/
 .pytest_cache/
-обложка/
+cover/
 
-# Переводы
+# Translations
 *.mo
 
-# Файлы Django:
+# Django stuff:
 
-# Файлы Flask:
+# Flask stuff:
 instance/
 .webassets-cache
 
-# Файлы Scrapy:
+# Scrapy stuff:
 .scrapy
 
-# Документация Sphinx
+# Sphinx documentation
 docs/_build/
 
 # PyBuilder
@@ -95,43 +95,43 @@ profile_default/
 ipython_config.py
 
 # pyenv
-# Для библиотеки или пакета вы можете проигнорировать эти файлы, поскольку код
-# предназначен для запуска в нескольких средах; в противном случае проверьте их в:
-# .python-версия
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+# .python-version
 
 # pipenv
-# Согласно pypa / pipenv # 598, рекомендуется включить Pipfile .заблокировать систему управления версиями.
-# Однако, в случае совместной работы, при наличии зависимостей, зависящих от платформы, или зависимостей
-# не имея кроссплатформенной поддержки, pipenv может устанавливать зависимости, которые не работают, или нет.
-# установите все необходимые зависимости.
-#Pipfile.блокировка
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
 
-# поэзия
-# Аналогично Pipfile.lock, обычно рекомендуется включать poetry.lock в системе управления версиями.
-# Это особенно рекомендуется для двоичных пакетов для обеспечения воспроизводимости и чаще всего игнорируется для библиотек.
-#
-# https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
+# poetry
+#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
+#   This is especially recommended for binary packages to ensure reproducibility, and is more
+#   commonly ignored for libraries.
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
 #poetry.lock
 
 # pdm
-# Как и в случае с Pipfile.lock, обычно рекомендуется включать pdm.lock в систему контроля версий.
+#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
 #pdm.lock
-# pdm хранит общесистемные конфигурации в .pdm.toml, но рекомендуется не включать его
-# в систему контроля версий.
-# https://pdm.fming.dev/#use-with-ide
+#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+#   in version control.
+#   https://pdm.fming.dev/#use-with-ide
 .pdm.toml
 
-# PEP 582; используется, например, в github.com/David-OConnor/pyflow и github.com/pdm-project/pdm
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
 
-# Файлы Celery
+# Celery stuff
 celerybeat-schedule
 celerybeat.pid
 
-# Файлы, проанализированные SageMath
+# SageMath parsed files
 *.sage.py
 
-# Среды
+# Environments
 .env
 .venv
 env/
@@ -140,14 +140,14 @@ ENV/
 env.bak/
 venv.bak/
 
-# Настройки проекта Spyder
+# Spyder project settings
 .spyderproject
 .spyproject
 
-# Настройки проекта Rope
+# Rope project settings
 .ropeproject
 
-# Документация mkdocs
+# mkdocs documentation
 /site
 
 # mypy
@@ -155,20 +155,20 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# Проверка типов Pyre
+# Pyre type checker
 .pyre/
 
-# Статический анализатор типов pytype
+# pytype static type analyzer
 .pytype/
 
-# Отладочные символы Cython
+# Cython debug symbols
 cython_debug/
 
 # PyCharm
-# Шаблон JetBrains хранится в отдельном файле JetBrains.gitignore, который можно
-# найти по адресу https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-# и добавить в глобальный файл gitignore или объединить с этим файлом. Для более радикального
-# варианта (не рекомендуется) вы можете раскомментировать следующее, чтобы игнорировать всю папку idea.
+#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
+#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  and can be added to the global gitignore or merged into this file.  For a more nuclear
+#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
-# Конец https://www.toptal.com/developers/gitignore/api/django
+# End of https://www.toptal.com/developers/gitignore/api/django
