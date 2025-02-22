@@ -58,7 +58,7 @@ def articles_view(request, id = None):
     articles = Articles.objects.get(id=id) if id is not None else None
     form = ArticlesForm(instance=articles)
     if request.method == "POST":
-        form = ArticlesForm(data=request.POST, instance=articles, initial={"user" : request.user})
+        form = ArticlesForm(data=request.POST, files=request.FILES, instance=articles, initial={"user" : request.user})
         if form.is_valid():
             form.save()
             return redirect("main")

@@ -9,6 +9,7 @@ class RegistrationForm(forms.Form):
     name = forms.CharField(max_length=256)
     surname = forms.CharField(max_length=256)
     login = forms.CharField(max_length=256)
+    photo = forms.ImageField()
     password = forms.CharField(max_length=256, widget=forms.PasswordInput())
     repetitionPassword = forms.CharField(max_length=256, widget=forms.PasswordInput())
 
@@ -26,7 +27,8 @@ class ArticlesForm(forms.ModelForm):
 
     class Meta:
         model = Articles
-        fields = ["title", "content"]
+        fields = ["title", "content", "image"]
         widgets = {
-            "content" : forms.Textarea(attrs={"cols" : 60, "row": 10})
+            "content" : forms.Textarea(attrs={"cols" : 60, "row": 10}),
+            'image': forms.FileInput(attrs={'required': False})
         }

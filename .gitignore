@@ -3,12 +3,12 @@
 
 ### Django ###
 *.log
-*.pot 
+*.pot
 *.pyc
 __pycache__/
-local_settings.py 
-db.sqlite3 
-db.sqlite3-журнал 
+local_settings.py
+db.sqlite3
+db.sqlite3-журнал
 медиа
 
 # Если ваш процесс сборки включает запуск collectstatic, то вам, вероятно, не нужно включать staticfiles или вы не хотите их включать/
@@ -16,15 +16,15 @@ db.sqlite3-журнал
 # <django-project-name>/staticfiles/
 
 ### Django.Python Stack ###
-# Скомпилированные в байтах / оптимизированные / DLL файлы 
+# Скомпилированные в байтах / оптимизированные / DLL файлы
 *.py[cod]
 *$py.class
 
-# Расширения C 
+# Расширения C
 *.so
 
 # Дистрибутив / упаковка
-.Python 
+.Python
 сборка/
 development-eggs/
 dist/
@@ -38,7 +38,7 @@ sdist/
 var/
 wheels/
 поделиться /python-wheels/
-*.egg-информация / 
+*.egg-информация /
 .установлено.cfg
 *.egg
 МАНИФЕСТ
@@ -46,24 +46,24 @@ wheels/
 # PyInstaller
 # Обычно эти файлы записываются скриптом python из шаблона
 # перед тем, как PyInstaller соберет exe-файл, чтобы ввести в него дату / другую информацию.
-* .манифест 
+* .манифест
 *.спецификация
 
-# Журналы установщика 
-pip-log.txt 
+# Журналы установщика
+pip-log.txt
 pip-delete-this-directory.txt
 
-# Отчеты о модульном тестировании / покрытии 
+# Отчеты о модульном тестировании / покрытии
 htmlcov/
 .токсин/
 .nox/
-.покрытие 
+.покрытие
 .покрытие.*
-.кэш 
-nosetests.xml 
-coverage.xml 
-*.обложка 
-*.py, обложка 
+.кэш
+nosetests.xml
+coverage.xml
+*.обложка
+*.py, обложка
 .гипотеза/
 .pytest_cache/
 обложка/
