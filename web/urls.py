@@ -8,5 +8,6 @@ urlpatterns = [
     path('auth/', auth_view, name="auth"),
     path('logout/', logout_view, name="logout"),
     path('articles/create', articles_view, name="articles_create"),
-    path('articles/<int:id>', articles_view, name="articles_edit")
+    path('articles/<int:id>', articles_view, name="articles_edit"),
+    path('articles/view/<int:id>', viewing_articles, name="articles_view")
 ]

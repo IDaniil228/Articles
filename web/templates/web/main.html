@@ -10,11 +10,12 @@
         <p><b>{{user.name}} {{user.surname}}</b></p>
         <p>Ваши статьи:</p>
         <ul>
-            {% for item in articles %}
+            {% for article in articles %}
                 <li>
-                    <b>{{ item.title }}</b>
-                    Дата публикации - {{item.create_date|date:'d-m-Y'}}
-                    <a href="{% url 'articles_edit' item.id %}">Редактировать</a>
+                    <b>{{ article.title }}</b>
+                    Дата публикации - {{article.create_date|date:'d-m-Y'}}
+                    <a href="{% url 'articles_edit' article.id %}">Редактировать</a>
+                    <a href="{% url 'articles_view' article.id %}">Просмотреть</a>
                 </li>
             {% endfor %}
         </ul>

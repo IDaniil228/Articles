@@ -30,5 +30,4 @@ class ArticlesForm(forms.ModelForm):
         fields = ["title", "content", "image"]
         widgets = {
             "content" : forms.Textarea(attrs={"cols" : 60, "row": 10}),
-            'image': forms.FileInput(attrs={'required': False})
         }

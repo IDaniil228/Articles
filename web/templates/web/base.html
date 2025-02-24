@@ -11,8 +11,7 @@
         {% if user.is_anonymous %}
             <a href="{% url 'auth' %}">Войти</a>
             <a href="{% url 'registration' %}">Зарегистрироваться</a>
-        {% endif %}
-        {% if not user.is_anonymous %}
+        {% else %}
             <a href="{% url 'main' %}">Профиль</a>
             <a href="{% url 'articles_create' %}">Написать статью</a>
             <a href="{% url 'logout' %}">Выйти</a>

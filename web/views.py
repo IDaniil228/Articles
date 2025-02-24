@@ -65,3 +65,9 @@ def articles_view(request, id = None):
     return render(request, "web/articles.html", {
         "form" : form
     })
+
+def viewing_articles(request, id):
+    article = Articles.objects.get(id=id)
+    return render(request, "web/viewing_articels.html", {
+        "article" : article
+    })
