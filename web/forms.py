@@ -9,7 +9,7 @@ class RegistrationForm(forms.Form):
     name = forms.CharField(max_length=256)
     surname = forms.CharField(max_length=256)
     login = forms.CharField(max_length=256)
-    photo = forms.ImageField()
+    photo = forms.ImageField(required=False)
     password = forms.CharField(max_length=256, widget=forms.PasswordInput())
     repetitionPassword = forms.CharField(max_length=256, widget=forms.PasswordInput())
 

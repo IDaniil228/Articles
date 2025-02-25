@@ -1,0 +1,17 @@
+{% extends "web/base.html" %}
+{% block content %}
+        <p>
+            <b>{{user.name}} {{user.surname}}</b>
+            <a href="{% url 'subscribe' user.id %}">Подписаться</a>
+        </p>
+        <p>Cтатьи:</p>
+        <ul>
+            {% for article in articles %}
+                <li>
+                    <b>{{ article.title }}</b>
+                    Дата публикации - {{article.create_date|date:'d-m-Y'}}
+                    <a href="{% url 'articles_view' article.id %}">Просмотреть</a>
+                </li>
+            {% endfor %}
+        </ul>
+{% endblock %}

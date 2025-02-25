@@ -19,6 +19,15 @@
                 </li>
             {% endfor %}
         </ul>
+            <p><b>Ваши подписки:</b></p>
+        <ul>
+            {% for subscription in subscriptions %}
+                <li>
+                    <b>{{ subscription.name }} {{ subscription.surname }}</b>
+                    <a href="{% url 'check_profile' subscription.id %}">Посмотреть профиль</a>
+                </li>
+            {% endfor %}
+        </ul>
 
     {% endif %}
 

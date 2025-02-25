@@ -11,8 +11,10 @@ from web.models import CustomUser, Articles
 def main_view(request):
     if not request.user.is_anonymous:
         articles = Articles.objects.filter(user=request.user)
+        subscriptions = request.user.subscriptions.all()
         return render(request, "web/main.html", {
-            "articles" : articles
+            "articles" : articles,
+            "subscriptions" : subscriptions
         })
     return render(request, "web/main.html")
 
@@ -66,8 +68,30 @@ def articles_view(request, id = None):
         "form" : form
     })
 
-def viewing_articles(request, id):
+def viewing_articles_view(request, id):
     article = Articles.objects.get(id=id)
     return render(request, "web/viewing_articels.html", {
         "article" : article
     })
+
+def other_authors_view(request):
+    all_sub_id = list(request.user.subscriptions.values_list('id', flat=True))
+    all_users = CustomUser.objects.exclude(id__in=all_sub_id).exclude(id=request.user.id)
+    return render(request, "web/other_authors.html", {
+        "users" : all_users
+    })
+
+def check_profile_view(request, id):
+    user = CustomUser.objects.get(id=id)
+    articles = Articles.objects.filter(user=user)
+    print(articles)
+    return render(request, "web/check_profile.html", {
+        "user" : user,
+        "articles" : articles
+    })
+
+
+def subscribe_view(request, id):
+    user = CustomUser.objects.get(id=id)
+    request.user.subscriptions.add(user)
+    return redirect("other_authors")

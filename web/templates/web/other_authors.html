@@ -1,0 +1,6 @@
+{% extends "web/base.html" %}
+{% block content %}
+    {% for user in users %}
+        <p>{{user.surname}} {{user.name}} <a href="{% url 'check_profile' user.id %}">Просмотреть профиль</a> </p>
+    {% endfor %}
+{% endblock %}
