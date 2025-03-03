@@ -7,7 +7,10 @@
     {% endif %}
 
     {% if not user.is_anonymous %}
-        <p><b>{{user.name}} {{user.surname}}</b></p>
+        <p><b>{{user.name}} {{user.surname}} <a href="{% url 'edit_profile' %}">Редактировать</a></b></p>
+        {% if user.photo %}
+        <img src="{{ user.photo.url }}">
+        {%  endif %}
         <p>Ваши статьи:</p>
         <ul>
             {% for article in articles %}
