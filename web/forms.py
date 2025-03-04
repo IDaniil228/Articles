@@ -36,3 +36,7 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = ["name", "surname", "photo"]
+
+
+class ArticlesFilterForm(forms.Form):
+    search = forms.CharField(widget=forms.TextInput(attrs={"placeholder" : "Поиск"}), required=False)

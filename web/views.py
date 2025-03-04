@@ -2,20 +2,32 @@ from collections import defaultdict
 from gc import get_objects
 
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 
-from web.forms import RegistrationForm, AuthorizationForm, ArticlesForm, EditProfileForm
+from web.forms import RegistrationForm, AuthorizationForm, ArticlesForm, EditProfileForm, ArticlesFilterForm
 from web.models import CustomUser, Articles
 
 
 def main_view(request):
     if not request.user.is_anonymous:
         articles = Articles.objects.filter(user=request.user)
+
+        filter_form = ArticlesFilterForm(request.GET)
+        filter_form.is_valid()
+        filters = filter_form.cleaned_data
+        if filters["search"]:
+            articles = articles.filter(title__icontains=filters["search"])
+
+        paginator = Paginator(articles, 2)
+        page_number = request.GET.get("page", 1)
+
         subscriptions = request.user.subscriptions.all()
         return render(request, "web/main.html", {
-            "articles" : articles,
-            "subscriptions" : subscriptions
+            "articles" : paginator.get_page(page_number),
+            "subscriptions" : subscriptions,
+            "filter_form" : filter_form
         })
     return render(request, "web/main.html")
 
