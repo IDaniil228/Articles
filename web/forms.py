@@ -1,7 +1,6 @@
 from django import  forms
 
-from web.models import Articles
-
+from web.models import Articles, CustomUser
 
 import datetime
 
@@ -31,3 +30,9 @@ class ArticlesForm(forms.ModelForm):
         widgets = {
             "content" : forms.Textarea(attrs={"cols" : 60, "row": 10}),
         }
+
+class EditProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ["name", "surname", "photo"]

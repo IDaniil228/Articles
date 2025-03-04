@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 
-from web.forms import RegistrationForm, AuthorizationForm, ArticlesForm
+from web.forms import RegistrationForm, AuthorizationForm, ArticlesForm, EditProfileForm
 from web.models import CustomUser, Articles
 
 
@@ -102,3 +102,15 @@ def subscribe_view(request, id):
     user = get_object_or_404(CustomUser, id=id)
     request.user.subscriptions.add(user)
     return redirect("other_authors")
+
+
+def edit_profile_view(request):
+    form = EditProfileForm(instance=request.user)
+    if request.method == "POST":
+        form = EditProfileForm(data=request.POST, files=request.FILES, instance=request.user)
+        form.save()
+        return redirect("main")
+
+    return render(request, "web/registration.html", {
+        "form" : form
+    })
