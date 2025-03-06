@@ -24,10 +24,16 @@ def main_view(request):
         page_number = request.GET.get("page", 1)
 
         subscriptions = request.user.subscriptions.all()
+
+        get_params = request.GET.copy()
+        if "page" in get_params:
+            del get_params["page"]
+
         return render(request, "web/main.html", {
             "articles" : paginator.get_page(page_number),
             "subscriptions" : subscriptions,
-            "filter_form" : filter_form
+            "filter_form" : filter_form,
+            "get_params" : get_params
         })
     return render(request, "web/main.html")
 
