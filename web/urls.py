@@ -13,5 +13,6 @@ urlpatterns = [
     path('articles/view/<int:id>', viewing_articles_view, name="articles_view"),
     path('other_authors/', other_authors_view, name="other_authors"),
     path('other_authors/<int:id>', check_profile_view, name="check_profile"),
-    path('other_authors/<int:id>/subscribe', subscribe_view, name="subscribe")
+    path('other_authors/<int:id>/subscribe', subscribe_view, name="subscribe"),
+    path('import/', import_view, name="import")
 ]

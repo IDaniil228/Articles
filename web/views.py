@@ -6,13 +6,15 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 
-from web.forms import RegistrationForm, AuthorizationForm, ArticlesForm, EditProfileForm, ArticlesFilterForm
+from web.forms import RegistrationForm, AuthorizationForm, ArticlesForm, EditProfileForm, ArticlesFilterForm, \
+    ImportCSVFrom
 from web.models import CustomUser, Articles
+from web.services import export_articles_csv, import_csv
 
 
 def main_view(request):
     if not request.user.is_anonymous:
-        articles = Articles.objects.filter(user=request.user)
+        articles = Articles.objects.filter(user=request.user).order_by("title")
 
         filter_form = ArticlesFilterForm(request.GET)
         filter_form.is_valid()
@@ -24,14 +26,23 @@ def main_view(request):
         page_number = request.GET.get("page", 1)
 
         subscriptions = request.user.subscriptions.all()
+        subscribers_count = len(CustomUser.objects.filter(subscriptions=request.user))
 
         get_params = request.GET.copy()
         if "page" in get_params:
             del get_params["page"]
 
+        if "export" in request.GET and request.GET["export"] == "csv":
+            response = HttpResponse(
+                content_type="text/csv",
+                headers={"Content-Disposition" : "attachment; filename=articles.csv" }
+            )
+            return  export_articles_csv(articles, response)
+
         return render(request, "web/main.html", {
             "articles" : paginator.get_page(page_number),
             "subscriptions" : subscriptions,
+            "subscribers_count" : subscribers_count,
             "filter_form" : filter_form,
             "get_params" : get_params
         })
@@ -131,4 +142,15 @@ def edit_profile_view(request):
 
     return render(request, "web/registration.html", {
         "form" : form
+    })
+
+
+def import_view(request):
+    if request.method == "POST":
+        form = ImportCSVFrom(files=request.FILES)
+        if form.is_valid():
+            import_csv(form.cleaned_data["file"], request.user)
+            return redirect("main")
+    return render(request, "web/import.html", {
+        "form" : ImportCSVFrom()
     })

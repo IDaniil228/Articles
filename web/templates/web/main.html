@@ -8,8 +8,9 @@
 
     {% if not user.is_anonymous %}
         <p><b>{{user.name}} {{user.surname}} <a href="{% url 'edit_profile' %}">Редактировать</a></b></p>
+        <small>На вас подписано {{ subscribers_count }} человек</small><br>
         {% if user.photo %}
-        <img src="{{ user.photo.url }}">
+            <img src="{{ user.photo.url }}">
         {%  endif %}
         <p>Ваши статьи:</p>
         <form action="">
@@ -18,6 +19,7 @@
                 {{ fields }}
             {% endfor %}
             <button>Искать</button>
+            <button name="export" value="csv">Скачать CSV</button>
         </form>
         <ul>
             {% for article in articles %}

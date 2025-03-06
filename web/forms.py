@@ -40,3 +40,6 @@ class EditProfileForm(forms.ModelForm):
 
 class ArticlesFilterForm(forms.Form):
     search = forms.CharField(widget=forms.TextInput(attrs={"placeholder" : "Поиск"}), required=False)
+
+class ImportCSVFrom(forms.Form):
+    file = forms.FileField()

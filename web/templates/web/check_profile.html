@@ -6,6 +6,9 @@
                 <a href="{% url 'subscribe' user.id %}">Подписаться</a>
             {% endif %}
         </p>
+        {% if user.photo %}
+            <img src="{{ user.photo.url }}">
+        {%  endif %}
         <p>Cтатьи:</p>
         <ul>
             {% for article in articles %}
