@@ -1,6 +1,6 @@
 from django import  forms
 
-from web.models import Articles, CustomUser
+from web.models import Articles, CustomUser, Tag
 
 import datetime
 
@@ -26,7 +26,12 @@ class ArticlesForm(forms.ModelForm):
 
     class Meta:
         model = Articles
-        fields = ["title", "content", "image"]
+        fields = ["title", "content", "image", "tags"]
+        tags = forms.ModelMultipleChoiceField(
+            queryset=Tag.objects.all(),
+            widget=forms.CheckboxSelectMultiple,
+            required=False
+        )
         widgets = {
             "content" : forms.Textarea(attrs={"cols" : 60, "row": 10}),
         }
@@ -43,3 +48,10 @@ class ArticlesFilterForm(forms.Form):
 
 class ImportCSVFrom(forms.Form):
     file = forms.FileField()
+
+
+class CreateTagForm(forms.ModelForm):
+
+    class Meta:
+        model = Tag
+        fields = ["title"]

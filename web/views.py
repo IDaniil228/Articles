@@ -7,8 +7,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 
 from web.forms import RegistrationForm, AuthorizationForm, ArticlesForm, EditProfileForm, ArticlesFilterForm, \
-    ImportCSVFrom
-from web.models import CustomUser, Articles
+    ImportCSVFrom, CreateTagForm
+from web.models import CustomUser, Articles, Tag
 from web.services import export_articles_csv, import_csv
 
 
@@ -91,10 +91,10 @@ def logout_view(request):
 
 
 def articles_view(request, id = None):
-    articles = get_object_or_404(Articles, id=id) if id is not None else None
-    form = ArticlesForm(instance=articles)
+    article = get_object_or_404(Articles, id=id) if id is not None else None
+    form = ArticlesForm(instance=article)
     if request.method == "POST":
-        form = ArticlesForm(data=request.POST, files=request.FILES, instance=articles, initial={"user" : request.user})
+        form = ArticlesForm(data=request.POST, files=request.FILES, instance=article, initial={"user" : request.user})
         if form.is_valid():
             form.save()
             return redirect("main")
@@ -103,9 +103,11 @@ def articles_view(request, id = None):
     })
 
 def viewing_articles_view(request, id):
-    article = get_object_or_404(Articles, id=id)
+    article = get_object_or_404(Articles.objects.prefetch_related("tags"), id=id)
+    #article = get_object_or_404(Articles, id=id)
     return render(request, "web/viewing_articels.html", {
-        "article" : article
+        "article" : article,
+        "tags" : article.tags.all()
     })
 
 def other_authors_view(request):
@@ -154,3 +156,21 @@ def import_view(request):
     return render(request, "web/import.html", {
         "form" : ImportCSVFrom()
     })
+
+
+def tags_view(request):
+    form = CreateTagForm()
+    if request.method == "POST":
+        form = CreateTagForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+    list_tags = Tag.objects.all()
+    return render(request, "web/create_tag.html", {
+        "form" : form,
+        "list_tags" : list_tags
+    })
+
+
+def tags_delete_view(request, id):
+    get_object_or_404(Tag, id=id).delete()
+    return redirect("create_tags")

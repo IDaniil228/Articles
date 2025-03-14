@@ -1,0 +1,16 @@
+{% extends "web/base.html" %}
+{% block content %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>Сохранить</button>
+  </form><hr>
+  {% for tag in list_tags %}
+  <ul>
+    <li>
+      {{ tag.title }}
+      <a href="{% url 'delete_tag' tag.id %}  ">Удалить</a>
+    </li>
+  </ul>
+  {% endfor %}
+{% endblock %}

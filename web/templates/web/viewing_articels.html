@@ -1,6 +1,10 @@
 {% extends "web/base.html" %}
 {% block content %}
     <h1>{{ article.title }}</h1>
+    Теги:
+    {% for tag in tags %}
+        {{ tag.title }}
+    {% endfor %}
     {% if article.image %}
     <img src="{{ article.image.url }}">
     {%  endif %}
