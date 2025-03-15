@@ -5,13 +5,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.views.decorators.cache import cache_page
 
+from articles.redis import get_redis_client
 from web.forms import RegistrationForm, AuthorizationForm, ArticlesForm, EditProfileForm, ArticlesFilterForm, \
     ImportCSVFrom, CreateTagForm
 from web.models import CustomUser, Articles, Tag
 from web.services import export_articles_csv, import_csv
 
-
+@cache_page(60)
 def main_view(request):
     if not request.user.is_anonymous:
         articles = Articles.objects.filter(user=request.user).order_by("title")
@@ -22,7 +24,7 @@ def main_view(request):
         if filters["search"]:
             articles = articles.filter(title__icontains=filters["search"])
 
-        paginator = Paginator(articles, 2)
+        paginator = Paginator(articles, 5)
         page_number = request.GET.get("page", 1)
 
         subscriptions = request.user.subscriptions.all()
@@ -174,3 +176,11 @@ def tags_view(request):
 def tags_delete_view(request, id):
     get_object_or_404(Tag, id=id).delete()
     return redirect("create_tags")
+
+def stat_view(request):
+    redis = get_redis_client()
+    keys = redis.keys("stat_*")
+    result = [(key.decode().replace("stat_", ""), redis.get(key).decode()) for key in keys]
+    return render(request, "web/stat.html", {
+        "result" : result
+    })

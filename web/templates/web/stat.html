@@ -1,0 +1,6 @@
+{% extends "web/base.html" %}
+{% block content %}
+  {% for url, count in result %}
+    {{ url }} - {{ count }}<br>
+  {% endfor %}
+{% endblock %}
