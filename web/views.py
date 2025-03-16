@@ -1,6 +1,3 @@
-from collections import defaultdict
-from gc import get_objects
-
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
@@ -13,7 +10,7 @@ from web.forms import RegistrationForm, AuthorizationForm, ArticlesForm, EditPro
 from web.models import CustomUser, Articles, Tag
 from web.services import export_articles_csv, import_csv
 
-@cache_page(60)
+#@cache_page(5)
 def main_view(request):
     if not request.user.is_anonymous:
         articles = Articles.objects.filter(user=request.user).order_by("title")
